@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMBO GUESS</title>
+
+    <style>
+
+        *{
+            margin : 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        section{
+            height : 100vh;
+            width : 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: cornflowerblue;
+        }
+
+        .game_container{
+            padding: 10px;
+            width : max-content;
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .numb{
+            height : 50px;
+            width : 50px;
+            margin: 5px;
+        }
+
+        .btn{
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        small{
+            font-size: 15px;
+            padding-top: 20px;
+            color : rgb(4, 119, 165)
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+    <section>
+
+        <div class = "game_container">
+            <div class = "message">Guess Combo</div>
+            <div class = "game"></div>
+            <button class = "btn">Start</button>
+            <small>
+              Instructions: Guess the combo, blue means higher red means lower. Try to
+              solve it in as little guesses as possible.
+            </small>
+        </div>
+        <div>
+        </div>
+
+
+    </section>
+    
+    <script>
+
+        // const message = document.querySelector('.message')
+        // const gameArea = document.querySelector('.game')
+        // const btn = document.querySelector('.btn')
+
+        // let score = 0
+        // let gamePlay = false
+
+        // function gameStart() {
+        //     if(!gamePlay) {
+        //         gamePlay = true
+        //         score = 0
+        //         gameArea.innerHTML = ''
+        //         message.innerHTML = 'Now Try'
+        //         btn.innerText = 'Check Combo'
+        //         rainMaker(5)
+        //     }else{
+        //         score++
+        //         message.innerHTML = `Guess : ${score}`
+        //         let number = document.querySelectorAll('.numb')
+        //         let correctNumber = 0
+        //         for(let i = 0; i < number.length; i++){
+        //             if(number[i].value == number[i].correct){
+        //                 number[i].style.backgroundColor = 'green'
+        //                 number[i].style.color = 'white'
+        //                 correctNumber++
+        //             }else if(number[i].value > number[i].correct){
+        //                 number[i].style.backgroundColor = 'red'
+        //                 number[i].style.color = 'white'
+        //             }else{
+        //                 number[i].style.backgroundColor = 'blue'
+        //                 number[i].style.color = 'white'
+        //             }
+        //             if(correctNumber === number.length){
+        //                 gameEnd()
+        //             }
+        //         }
+        //     }
+        // }
+
+        // function gameEnd(){
+        //     gamePlay = false
+        //     message.innerHTML = `You guessed the combo in ${score} guesses`
+        //     btn.innerText = 'Restart Game'
+        // }
+
+        // function rainMaker(num) {
+        //     for(let i = 0; i < num; i++) {
+        //         let inp = document.createElement('input')
+        //         inp.setAttribute('type', 'number')
+        //         inp.min = 0
+        //         inp.max = 9
+        //         inp.value = 0
+        //         inp.classList.add('numb')
+        //         inp.style.fontSize = '20px' 
+        //         inp.correct = Math.floor(Math.random() * 10)
+        //         gameArea.appendChild(inp)
+        //     }
+        // }
+
+        // btn.addEventListener('click', gameStart)
+
+
+    const message = document.querySelector('.message')
+    const gameArea = document.querySelector('.game')
+    const btn = document.querySelector('button')
+
+    let score = 0
+    let gamePlay = false
+
+
+    function startGame() {
+        if(!gamePlay) {
+            gamePlay = true
+            score = 0
+            gameArea.innerHTML = ''
+            message.innerText = 'Now Try'
+            btn.innerText = 'Check Combo'
+            rainMaker(4)
+        }else{
+            score++
+            message.innerText = `Guess : ${score}`
+            let correctNumber = 0
+            let number = document.querySelectorAll('.numb')
+            for(let i = 0; i < number.length; i++){
+                if(number[i].value == number[i].correct){
+                    number[i].style.backgroundColor = 'green'
+                    number[i].style.color = 'white'
+                    correctNumber++
+                }else if(number[i].value > number[i].correct){
+                    number[i].style.backgroundColor = 'red'
+                    number[i].style.color = 'white'
+                }else{
+                    number[i].style.backgroundColor = 'blue'
+                    number[i].style.color = 'white'
+                }
+                if(correctNumber == number.length){
+                    gameEnd()
+                }
+            }
+
+        }
+    }
+
+    function gameEnd(){
+        gamePlay = false
+        message.innerText = `You guessed the numbers in ${score} guesses`
+        btn.innerText = 'Restart Game'
+    }
+
+    function rainMaker(num) {
+        for(let i = 0; i < num; i++){
+            let inp = document.createElement('input')
+            inp.setAttribute('type', 'number')
+            inp.min = 0
+            inp.max = 9
+            inp.value = 0
+            inp.style.fontSize = '20px'
+            inp.correct = Math.floor(Math.random() * 10)
+            inp.classList.add('numb')
+            gameArea.appendChild(inp)
+        }
+    }
+
+    btn.addEventListener('click', startGame)
+
+    </script>
+
+</body>
+</html>
